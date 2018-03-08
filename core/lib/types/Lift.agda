@@ -41,7 +41,19 @@ Lift-fmap-equiv = equiv Lift-fmap (λ f → lower ∘ f ∘ lift) (λ _ → idp)
   → (X ⊙→ Y) → (⊙Lift {j = k} X ⊙→ ⊙Lift {j = k} Y)
 ⊙Lift-fmap f = ⊙lift ⊙∘ f ⊙∘ ⊙lower
 
+private 
+  help : ∀ {i j k} {X : Ptd i} {Y : Ptd j}
+       → (a : X ⊙→ Y) →
+         ⊙lower {i = j} {j = k} ⊙∘ ⊙Lift-fmap a ⊙∘ ⊙lift == a
+  help (_ , idp) = idp
+
+  help′ : ∀ {i j k} {X : Ptd i} {Y : Ptd j}
+        → (l : ⊙Lift {j = k} X ⊙→ ⊙Lift {j = k} Y) →
+        ⊙Lift-fmap (⊙lower ⊙∘ l ⊙∘ ⊙lift) == l
+  help′ (_ , idp) = idp
+
 ⊙Lift-fmap-equiv : ∀ {i j k} {X : Ptd i} {Y : Ptd j}
   → (X ⊙→ Y) ≃ (⊙Lift {j = k} X ⊙→ ⊙Lift {j = k} Y)
 ⊙Lift-fmap-equiv = equiv ⊙Lift-fmap (λ f → ⊙lower ⊙∘ f ⊙∘ ⊙lift)
-  (λ {(_ , idp) → idp}) (λ {(_ , idp) → idp})
+                 help′ help 
+

@@ -178,7 +178,7 @@ instance
   ≃-level : ∀ {i j} {n : ℕ₋₂} {A : Type i} {B : Type j}
     → (has-level n A → has-level n B → has-level n (A ≃ B))
   ≃-level {n = ⟨-2⟩} = ≃-contr
-  ≃-level {n = S n} pA pB = Σ-level ⟨⟩ ⟨⟩ where instance _ = pA; _ = pB
+  ≃-level {n = S n} pA pB = Σ-level (Π-level (λ _ → ⟨⟩)) ⟨⟩ where instance _ = pA; _ = pB
 
   universe-=-level : ∀ {i} {n : ℕ₋₂} {A B : Type i}
     → (has-level n A → has-level n B → has-level n (A == B))

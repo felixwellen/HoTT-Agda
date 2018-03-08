@@ -234,7 +234,7 @@ module _ {i j} {A : Type i} {B : A → Type j} where
     → u == w [ B ↓ (! p) ∙ p' ]
   _!◃_ {p = idp} idp q = q
 
-  !◃idp :{x : A} {v w : B x} (q : v == w)
+  !◃idp : {x : A} {v w : B x} (q : v == w)
     → q !◃ idp == ! q
   !◃idp idp = idp
 
