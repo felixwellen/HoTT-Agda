@@ -252,6 +252,8 @@ module lib.types.Modality where
         → is-local A → is-local B → is-local (A × B)
       ×-is-local {B = B} lA lB = Σ-is-local (λ _ → B) lA (λ _ → lB)
 
+    {- ◯ preserves products -}
+
     ◯-×-econv : {A B : Type ℓ} → ◯ (A × B) ≃ ◯ A × ◯ B
     ◯-×-econv {A} {B} = equiv ◯-split ◯-pair inv-l inv-r
 
@@ -288,3 +290,14 @@ module lib.types.Modality where
               inv-r = ◯-elim (λ _ → ◯-=-is-local _ _)
                              (λ ab → ap ◯-pair (pair×= (◯-fst-β ab) (◯-snd-β ab)) ∙ ◯-pair-β (fst ab) (snd ab))
 
+    {- ◯ preserves some Σs -}
+{-
+    ◯-yoneda : ∀ {A B : Type ℓ} (f : A → B)
+      → is-local B 
+      → ((C : Type ℓ) (p : is-local C) → is-equiv (λ (h : B → C) → h ∘ f))   -- (B → C) ≃ (A → C)
+      → ◯ A ≃ B
+    ◯-yoneda = {!!}
+
+    ◯-Σ-econv : {A : Type ℓ} {B : (x : ◯ A) → Type ℓ} → ◯ (Σ A (B ∘ η)) ≃ Σ (◯ A) (λ x → ◯ (B x))
+    ◯-Σ-econv = {!!}
+-}
